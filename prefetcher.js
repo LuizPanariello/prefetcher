@@ -107,5 +107,4 @@
 	        document.body.appendChild(obj);
     	}
 	};
-
 })(window);
