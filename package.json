@@ -1,0 +1,31 @@
+{
+  "name": "Prefetcher.js",
+  "version": "1.0.0",
+  "description": "Load files before they are needed",
+  "main": "prefetcher.js",
+  "scripts": {
+    "test": "none"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/LuizPanariello/prefetcher.git"
+  },
+  "keywords": [
+    "Prefetching",
+    "front",
+    "prefetch",
+    "files",
+    "load"
+  ],
+  "author": "Luiz Panariello @luizpanariello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/LuizPanariello/prefetcher/issues"
+  },
+  "homepage": "https://github.com/LuizPanariello/prefetcher",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-uglify": "^0.9.1",
+    "load-grunt-tasks": "^3.1.0"
+  }
+}
