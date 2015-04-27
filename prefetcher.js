@@ -93,7 +93,7 @@
 	            continue;
 	        }
 
-        	obj = document.createElement('');
+        	obj = document.createElement('object');
 
         	obj.onload = function(event){
         		_self._loaded();
