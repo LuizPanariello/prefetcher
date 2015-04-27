@@ -22,7 +22,7 @@
 	PREFETCHER.prototype.listBegin = function(){};
 	
 	/**
-	 * Lista recebida
+	* Lista recebida
 	**/
 	PREFETCHER.prototype.listComplete = function(status){};
 
@@ -52,7 +52,9 @@
 	PREFETCHER.prototype._loaded = function(status){
 		var _self = this;
 		_self._loadedcount ++;
-		if(_self._loadedcount == _self._prefetch.length - 1){
+		console.log(_self._loadedcount);
+
+		if(_self._loadedcount == _self._prefetch.length){
 			_self.loadComplete();
 		}
 	};
@@ -72,37 +74,41 @@
 		_self._loadedcount = 0;	
 		_self.loadBegin();
 		
-		var last = _self._prefetch.length - 1;
 		for (i = 0, max = _self._prefetch.length; i < max; i += 1) {
-	        if (_self.isIE) {
+	        if (!_self.isIE) {
 	            var img = new Image();
+	            
+	            img.onerror = function(){
+	            	_self._loaded();
+        			_self.loadItemError();
+        		};
+
+        		img.onload = function(){
+	            	_self._loaded();
+        			_self.loadItemComplete();
+        		};
+
 	            img.src = _self._prefetch[i];
-	            img.onload = function(){
-	            	_self._loaded(200);
-        			_self.loadItemComplete(200);
-        		};
-
-        		img.onerror = function(){
-	            	_self._loaded(404);
-        			_self.loadItemError(400);
-        		};
-
+	            
 	            continue;
 	        }
 
-        	obj = document.createElement('object');
+        	obj = document.createElement('');
+
+        	obj.onload = function(event){
+        		_self._loaded();
+        		_self.loadItemComplete();
+        	};
+
+        	obj.onerror = function(){
+        		_self._loaded();
+        		_self.loadItemError();
+        	};
+
         	obj.data = _self._prefetch[i];
         	obj.width  = 0;
         	obj.height = 0;
-        	obj.onload = function(event){
-        		_self._loaded(404);
-        		_self.loadItemComplete(200);
-        	};
         	
-        	obj.onerror = function(){
-        		_self._loaded(404);
-        		_self.loadItemError(404);
-        	};
 
 	        document.body.appendChild(obj);
     	}

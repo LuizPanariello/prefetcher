@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Prefetcher</title>
+	<script src="prefetcher.js"></script>
+</head>
+<body>
+	<h1>POC Prefetcher</h1>
+	<p>O ponto são os callbacks!</p>
+
+<script>
+
+	var fetcher = new PREFETCHER([
+		'http://localhost/js/configLogin.js',
+		'http://code.jquery.com/jquery-1.11.2.min.js',
+	]);
+	
+	fetcher.loadBegin = function(){
+	};
+
+	fetcher.loadComplete = function(status){
+		console.log("COMPLETE");
+	};
+
+	fetcher.loadPrefetch();
+
+</script>
+<a href="demo2.html">Next page with loaded elements</a>
+</body>
+</html>
