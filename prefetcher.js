@@ -24,7 +24,7 @@
 	/**
 	* Lista recebida
 	**/
-	PREFETCHER.prototype.listComplete = function(status){};
+	PREFETCHER.prototype.listComplete = function(status, data){};
 
 	/**
 	 * Inicio do download
@@ -52,7 +52,6 @@
 	PREFETCHER.prototype._loaded = function(status){
 		var _self = this;
 		_self._loadedcount ++;
-		console.log(_self._loadedcount);
 
 		if(_self._loadedcount == _self._prefetch.length){
 			_self.loadComplete();
@@ -63,7 +62,20 @@
 	 * Busca a lista de arquivos
 	 */
 	PREFETCHER.prototype.getList = function(url){
-		this.listBegin();
+		var _self = this;
+		_self.listBegin();
+
+		var xmlhttp = new XMLHttpRequest(); 
+
+	    xmlhttp.onreadystatechange = function(data) {
+	        if (xmlhttp.readyState == XmlHttpRequest.DONE){
+	        	_self._prefetch = JSON.parse(xmlhttp.responseText);
+	            _self.listComplete(xmlhttp.status, xmlhttp.responseText);
+	        }
+	    }
+
+	    xmlhttp.open("GET", url, true);
+	    xmlhttp.send();
 	};
 
 	/**
@@ -75,7 +87,7 @@
 		_self.loadBegin();
 		
 		for (i = 0, max = _self._prefetch.length; i < max; i += 1) {
-	        if (!_self.isIE) {
+	        //if (!_self.isIE) {
 	            var img = new Image();
 	            
 	            img.onerror = function(){
@@ -90,27 +102,23 @@
 
 	            img.src = _self._prefetch[i];
 	            
-	            continue;
-	        }
+	        //    continue;
+	        //}
 
-        	obj = document.createElement('object');
-
-        	obj.onload = function(event){
-        		_self._loaded();
-        		_self.loadItemComplete();
-        	};
-
-        	obj.onerror = function(){
-        		_self._loaded();
-        		_self.loadItemError();
-        	};
-
-        	obj.data = _self._prefetch[i];
-        	obj.width  = 0;
-        	obj.height = 0;
-        	
-
-	        document.body.appendChild(obj);
+        	// obj = document.createElement('object');
+        	// obj.onload = function(event){
+        	// 	_self._loaded();
+        	// 	_self.loadItemComplete();
+        	// };
+        	// obj.onerror = function(){
+        	// 	_self._loaded();
+        	// 	_self.loadItemError();
+        	// };
+        	// obj.data = _self._prefetch[i];
+        	// obj.width  = 0;
+        	// obj.height = 0;
+	        // document.body.appendChild(obj);
     	}
 	};
+
 })(window);
