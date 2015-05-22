@@ -86,7 +86,7 @@
 		var xmlhttp = new XMLHttpRequest(); 
 
 	    xmlhttp.onreadystatechange = function(data) {
-	        if (xmlhttp.readyState == XMLHttpRequest.DONE){
+	        if (xmlhttp.readyState == XMLHttpRequest.DONE || xmlhttp.readyState == 4){
 	        	_self._prefetch = JSON.parse(xmlhttp.responseText);
 	            _self.listComplete(xmlhttp.status, xmlhttp.responseText);
 	        }
@@ -104,40 +104,22 @@
 		_self._loadedcount = 0;	
 		_self.loadBegin();
 		
-		for (i = 0, max = _self._prefetch.length; i < max; i ++) {
-	        if (!_self.isIE) {
-	            var img = new Image();
-	            
-	            img.onerror = function(){
-	            	_self._loaded();
-        			_self.loadItemError();
-        			_self.loadItemComplete();
-        		};
+		for (i = 0; i < _self._prefetch.length; i ++) {
+            var img = new Image();
+            
+            img.onerror = function(){
+            	_self._loaded();
+    			_self.loadItemError();
+    			_self.loadItemComplete();
+    		};
 
-        		img.onload = function(){
-	            	_self._loaded();
-        			_self.loadItemSuccess();
-        			_self.loadItemComplete();
-        		};
+    		img.onload = function(){
+            	_self._loaded();
+    			_self.loadItemSuccess();
+    			_self.loadItemComplete();
+    		};
 
-	            img.src = _self._prefetch[i];
-	            
-	           continue;
-	        }
-
-        	obj = document.createElement('object');
-        	obj.onload = function(event){
-        		_self._loaded();
-        		_self.loadItemComplete();
-        	};
-        	obj.onerror = function(){
-        		_self._loaded();
-        		_self.loadItemError();
-        	};
-        	obj.data = _self._prefetch[i];
-        	obj.width  = 0;
-        	obj.height = 0;
-	        document.body.appendChild(obj);
+            img.src = _self._prefetch[i];
     	}
 	};
 
