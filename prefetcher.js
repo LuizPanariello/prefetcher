@@ -68,7 +68,7 @@
 		var xmlhttp = new XMLHttpRequest(); 
 
 	    xmlhttp.onreadystatechange = function(data) {
-	        if (xmlhttp.readyState == XmlHttpRequest.DONE){
+	        if (xmlhttp.readyState == XMLHttpRequest.DONE){
 	        	_self._prefetch = JSON.parse(xmlhttp.responseText);
 	            _self.listComplete(xmlhttp.status, xmlhttp.responseText);
 	        }
