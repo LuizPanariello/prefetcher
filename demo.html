@@ -8,24 +8,86 @@
 	<h1>POC Prefetcher</h1>
 	<p>O ponto são os callbacks!</p>
 	<p class="response"></p>
+	
+	<a href="demo2.html">Next page with loaded elements</a>
+
+	<button id="ctl00_ConteudoInicio_myBotaoEnvia" onclick="alert('Complete');">ae</button>
+
+	<div id="load-wrapper" class="loader-wrapper">
+        <div id="loader" class="loader"></div>
+    </div>
 
 <script>
 
-	var fetcher = new PREFETCHER(["http://dttemplate.s3-website-us-east-1.amazonaws.com/e9cbc5a6-da35-4d11-b4a9-9d621fc9e312/4c7baf69-8a0a-4998-8a20-f1f56ee0563a.jpg","http://dtchtdt02.qa.directtalk.com.br/chat31/js/raven.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jquery-1.4.2.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jqModal.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jqModal.min.css","http://dtchtdt02.qa.directtalk.com.br/chat31/LayoutDT/Padrao/alert.mp3","http://dtchtdt02.qa.directtalk.com.br/chat31/js/strophe-1.1.3.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jquery-popupWindow.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/emoticons.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/chatXMPP-1.0.5.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_body.jpg","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_cabecalho.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_content.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_feedback_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_feedback_sucess.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_footer.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_form.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_header.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_loading.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_aguarde.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_entrar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_enviar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_feedback_fechar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_feedback_reconectar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_nao.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_reconectar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_sair.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_sair_top.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_sim.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bullet_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bullet_red.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk_b.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk_l.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk_p.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/divider.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/dt_logo_powered.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/dt_logo_powered.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/icon_atencao.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/icon_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/icon_sucess.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/indicator.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/logo.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/operador_busy.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/operador_free.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/user.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/user_suit.png","http://dtchtdt02.qa.directtalk.com.br/chat31/App_Themes/Padrao/dtSkin.css"]);
+	var fetching = new PREFETCHER(["http://dttemplate.s3-website-us-east-1.amazonaws.com/e9cbc5a6-da35-4d11-b4a9-9d621fc9e312/4c7baf69-8a0a-4998-8a20-f1f56ee0563a.jpg","http://dtchtdt02.qa.directtalk.com.br/chat31/js/raven.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jquery-1.4.2.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jqModal.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jqModal.min.css","http://dtchtdt02.qa.directtalk.com.br/chat31/LayoutDT/Padrao/alert.mp3","http://dtchtdt02.qa.directtalk.com.br/chat31/js/strophe-1.1.3.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/jquery-popupWindow.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/emoticons.js","http://dtchtdt02.qa.directtalk.com.br/chat31/js/chatXMPP-1.0.5.min.js","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_body.jpg","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_cabecalho.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_content.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_feedback_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_feedback_sucess.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_footer.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_form.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_header.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bk_loading.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_aguarde.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_entrar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_enviar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_feedback_fechar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_feedback_reconectar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_nao.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_reconectar.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_sair.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_sair_top.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/btn_sim.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bullet_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/bullet_red.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk_b.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk_l.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/directtalk_p.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/divider.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/dt_logo_powered.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/dt_logo_powered.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/icon_atencao.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/icon_error.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/icon_sucess.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/indicator.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/logo.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/operador_busy.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/operador_free.gif","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/user.png","http://dtchtdt02.qa.directtalk.com.br/chat31/skin/padrao/images/user_suit.png","http://dtchtdt02.qa.directtalk.com.br/chat31/App_Themes/Padrao/dtSkin.css"]);
 	
-	fetcher.loadBegin = function(){
-		var obj = document.querySelectorAll('.response')[0];
+    var maxvalue,
+        actualvalue = 0,
+        percent = 0;
+
+    var updateGraph = function(percent){
+        var el = document.getElementById('loader');
+        el.style.width = percent + '%';
+    };
+
+    fetching.loadBegin = function(status, data){
+        maxvalue = fetching._prefetch.length - 1;
+        actualvalue = 0;
+        percent = (actualvalue/maxvalue) * 100;
+
+        var obj = document.querySelectorAll('.response')[0];
 		obj.innerHTML = 'Begin';
-	};
+    };
 
-	fetcher.loadComplete = function(status){
-		var obj = document.querySelectorAll('.response')[0];
+    fetching.loadItemComplete = function(){
+        actualvalue += 1;
+
+        percent = (actualvalue/maxvalue) * 100;
+        updateGraph(percent);
+    };
+
+    fetching.loadComplete = function(){
+    	percent = (actualvalue/maxvalue) * 100;
+        updateGraph(percent);
+
+        var el = document.getElementById('ctl00_ConteudoInicio_myBotaoEnvia');
+        if (el.onclick) {
+           el.onclick();
+        } else if (el.click) {
+           el.click();
+        }
+
+        var obj = document.querySelectorAll('.response')[0];
 		obj.innerHTML = 'Ended';
-	};
+    };
 
-	fetcher.loadPrefetch();
-
+	fetching.loadPrefetch();
 </script>
-<a href="demo2.html">Next page with loaded elements</a>
+
+<style>
+    .loader-wrapper {
+        height: 50%;
+        width: 320px;
+        max-width: 90%;
+        margin: 0 auto;
+        height: 5px;
+        background: #f0f0f0;
+        overflow: hidden;
+        position: relative;
+        border-radius: 5px;
+    }
+    .loader{
+        height:100%;
+        position:absolute;
+        left:0;
+        background:#666;
+        width:0%;
+        -webkit-transition: width 1s ease-in-out;
+        -moz-transition: width 1s ease-in-out;
+        -o-transition: width 1s ease-in-out;
+        transition: width 1s ease-in-out;
+    }
+</style>
+</style>
 </body>
 </html>

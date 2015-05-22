@@ -37,6 +37,11 @@
 	PREFETCHER.prototype.loadItemComplete = function(status){};
 
 	/**
+	 * Um item concluido com sucesso
+	 */
+	PREFETCHER.prototype.loadItemSuccess = function(status){};
+
+	/**
 	 * Um item concluido com erro
 	 */
 	PREFETCHER.prototype.loadItemError = function(status){};
@@ -86,38 +91,40 @@
 		_self._loadedcount = 0;	
 		_self.loadBegin();
 		
-		for (i = 0, max = _self._prefetch.length; i < max; i += 1) {
-	        //if (!_self.isIE) {
+		for (i = 0, max = _self._prefetch.length; i < max; i ++) {
+	        if (!_self.isIE) {
 	            var img = new Image();
 	            
 	            img.onerror = function(){
 	            	_self._loaded();
         			_self.loadItemError();
+        			_self.loadItemComplete();
         		};
 
         		img.onload = function(){
 	            	_self._loaded();
+        			_self.loadItemSuccess();
         			_self.loadItemComplete();
         		};
 
 	            img.src = _self._prefetch[i];
 	            
-	        //    continue;
-	        //}
+	           continue;
+	        }
 
-        	// obj = document.createElement('object');
-        	// obj.onload = function(event){
-        	// 	_self._loaded();
-        	// 	_self.loadItemComplete();
-        	// };
-        	// obj.onerror = function(){
-        	// 	_self._loaded();
-        	// 	_self.loadItemError();
-        	// };
-        	// obj.data = _self._prefetch[i];
-        	// obj.width  = 0;
-        	// obj.height = 0;
-	        // document.body.appendChild(obj);
+        	obj = document.createElement('object');
+        	obj.onload = function(event){
+        		_self._loaded();
+        		_self.loadItemComplete();
+        	};
+        	obj.onerror = function(){
+        		_self._loaded();
+        		_self.loadItemError();
+        	};
+        	obj.data = _self._prefetch[i];
+        	obj.width  = 0;
+        	obj.height = 0;
+	        document.body.appendChild(obj);
     	}
 	};
 
