@@ -1,4 +1,4 @@
-# Prefetcher.js v1.0.0 
+# Prefetcher.js v1.0.0 [![bitHound Score](https://www.bithound.io/github/LuizPanariello/prefetcher/badges/score.svg)](https://www.bithound.io/github/LuizPanariello/prefetcher)
 JS Lib to prefetch files for next page, you just need to pass an array to Prefecher obj.
 Vanilla JS
 
